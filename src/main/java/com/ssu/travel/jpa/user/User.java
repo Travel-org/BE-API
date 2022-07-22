@@ -1,4 +1,4 @@
-package com.ssu.travel.domain.user;
+package com.ssu.travel.jpa.user;
 
 
 import lombok.Getter;
