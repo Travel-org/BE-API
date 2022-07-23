@@ -19,6 +19,8 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+  profiles:
+    active: test
   output:
     ansi:
       enabled: always
