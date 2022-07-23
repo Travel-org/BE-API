@@ -7,18 +7,16 @@ spring:
       path: /h2-console
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:mtravel
+    url: jdbc:h2:tcp://localhost/~/mtravel
     username: sa
   jpa:
     hibernate:
       ddl-auto: create-drop
-    generate-ddl: true
-    database: h2
-    defer-datasource-initialization: true
     properties:
       hibernate:
         show_sql: true
         format_sql: true
+
   profiles:
     active: test
   output:
