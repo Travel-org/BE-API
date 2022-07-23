@@ -1,14 +1,9 @@
 spring:
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: true
-      path: /h2-console
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/mtravel
+    url: jdbc:h2:mem:test;MODE=MariaDB;DATABASE_TO_LOWER=TRUE;
     username: sa
+
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -17,8 +12,15 @@ spring:
         show_sql: true
         format_sql: true
 
+  # swagger
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
   profiles:
     active: test
+  jackson:
+    serialization.WRITE_DATES_AS_TIMESTAMPS=false
   output:
     ansi:
       enabled: always
