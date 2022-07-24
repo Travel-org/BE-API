@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
 
+    @Override
     @Transactional
     public UserResponseInfoDto createUser(UserCreateRequestDto userCreateRequestDto) {
         User newUser = userCreateRequestDto.toEntity();
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService{
         return new UserResponseInfoDto(user);
     }
 
+    @Override
     @Transactional(readOnly = true)
     public List<UserResponseInfoDto> getUsers() {
         return userRepository
