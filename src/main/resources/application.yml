@@ -5,11 +5,6 @@ spring:
       settings:
         web-allow-others: true
       path: /h2-console
-  # swagger
-
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
@@ -19,14 +14,26 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     properties:
       hibernate:
         show_sql: true
         format_sql: true
 
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+
+  # swagger
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
   profiles:
     active: default
+    include:
+      - "auth"
 
   jackson:
     serialization.WRITE_DATES_AS_TIMESTAMPS=false
