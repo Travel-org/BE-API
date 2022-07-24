@@ -11,18 +11,16 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 public class TravelCreateRequestDto {
+    private Long userId;
     private String title;
-    private String memo;
     private TravelType travelType;
     private LocalDate startDate;
     private LocalDate endDate;
 
-
-
     @Builder
-    public TravelCreateRequestDto(String title, String memo, TravelType travelType, LocalDate startDate, LocalDate endDate) {
+    public TravelCreateRequestDto(Long userId, String title, TravelType travelType, LocalDate startDate, LocalDate endDate) {
+        this.userId = userId;
         this.title = title;
-        this.memo = memo;
         this.travelType = travelType;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -31,7 +29,6 @@ public class TravelCreateRequestDto {
     public Travel toEntity() {
         return Travel.builder()
                 .title(title)
-                .memo(memo)
                 .startDate(startDate)
                 .endDate(endDate)
                 .travelType(travelType)
