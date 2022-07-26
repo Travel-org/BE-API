@@ -29,6 +29,6 @@ spring:
     ansi:
       enabled: always
 
-logging:
-  level:
-    org.hibernate.SQL: debug
+#logging:
+#  level:
+#    org.hibernate.SQL: debug
