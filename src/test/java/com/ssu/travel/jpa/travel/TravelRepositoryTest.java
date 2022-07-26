@@ -1,13 +1,13 @@
 package com.ssu.travel.jpa.travel;
 
 import com.ssu.travel.dto.travel.TravelCreateRequestDto;
-import org.junit.jupiter.api.AfterEach;
+import com.ssu.travel.jpa.user.UserRepository;
+import com.ssu.travel.jpa.usertravel.UserTravelRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -16,36 +16,35 @@ class TravelRepositoryTest {
 
     @Autowired
     TravelRepository travelRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    UserTravelRepository userTravelRepository;
 
-    @AfterEach
-    void cleanUp() {
-        travelRepository.deleteAll();
-    }
+    private final String title = "테스트 title";
+    private final LocalDate startDate = LocalDate.now();
+    private final LocalDate endDate = LocalDate.of(2022, 12, 25);
+    private final Long managerId = 1L;
+
+    private final TravelType travelType = TravelType.PUBLIC;
 
     @Test
-    void travelList() {
-
-        LocalDate startDate = LocalDate.of(2022, 07, 23);
-        LocalDate endDate = LocalDate.of(2022, 12, 25);
-
-        TravelCreateRequestDto dto = TravelCreateRequestDto.builder()
-                .title("테스트 title")
-                .memo("테스트 memo")
+    void createTravel() {
+        // given
+        TravelCreateRequestDto travelCreateRequestDto = TravelCreateRequestDto.builder()
+                .title(title)
+                .travelType(travelType)
                 .startDate(startDate)
                 .endDate(endDate)
-                .travelType(TravelType.PUBLIC)
                 .build();
 
-        travelRepository.save(dto.toEntity());
+        // when
+        Travel result = travelRepository.save(travelCreateRequestDto.toEntity());
 
-        // when 
-        List<Travel> travels = travelRepository.findAll();
-        
-        // then 
-        Travel res = travels.get(0);
-        assertThat(res.getTitle()).isEqualTo("테스트 title");
-        assertThat(res.getMemo()).isEqualTo("테스트 memo");
-        assertThat(res.getStartDate().isEqual(startDate));
-        assertThat(res.getEndDate().isEqual(endDate));
+        // then
+        assertThat(result.getTitle()).isEqualTo(title);
+        assertThat(result.getManagerId()).isEqualTo(managerId);
+        assertThat(result.getStartDate()).isEqualTo(startDate);
+        assertThat(result.getEndDate()).isEqualTo(endDate);
     }
 }
