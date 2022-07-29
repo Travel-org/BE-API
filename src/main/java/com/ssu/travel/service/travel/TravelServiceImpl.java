@@ -1,8 +1,6 @@
 package com.ssu.travel.service.travel;
 
-import com.ssu.travel.dto.travel.TravelCreateRequestDto;
-import com.ssu.travel.dto.travel.TravelResponseDto;
-import com.ssu.travel.dto.user.UserSimpleInfoDto;
+import com.ssu.travel.dto.user.SimpleUserInfoDto;
 import com.ssu.travel.jpa.travel.Travel;
 import com.ssu.travel.jpa.travel.TravelRepository;
 import com.ssu.travel.jpa.user.User;
@@ -26,32 +24,25 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     @Transactional
-    public TravelResponseDto createTravel(TravelCreateRequestDto travelCreateRequestDto) {
-
-        Optional<User> user = userRepository.findById(travelCreateRequestDto.getUserId());
+    public Travel insertTravel(Travel travel) {
+        Optional<User> user = userRepository.findById(travel.getManagerId());
         if (user.isEmpty()) {
             throw new RuntimeException("등록된 유저가 없다!!");
         }
-        Travel travel = travelCreateRequestDto.toEntity();
-
         UserTravel userTravel = UserTravel.builder()
                 .user(user.get())
                 .travel(travel)
                 .build();
-        userTravelRepository.save(userTravel);
 
+        userTravelRepository.save(userTravel);
         travel.addUserTravel(userTravel);
-        travelRepository.save(travel);
-        return new TravelResponseDto(travel);
+        return travelRepository.save(travel);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<TravelResponseDto> getAllTravels() {
-        return travelRepository
-                .findAll()
-                .stream().map(TravelResponseDto::new)
-                .collect(Collectors.toList());
+    public List<Travel> getAllTravels() {
+        return travelRepository.findAll();
     }
 
     @Override
@@ -92,12 +83,18 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserSimpleInfoDto> getSimpleUsersOfTravel(Long travelId) {
+    public List<SimpleUserInfoDto> getSimpleUsersOfTravel(Long travelId) {
         return getTravelById(travelId)
                 .getUserTravels()
                 .stream()
                 .map(UserTravel::getUser)
-                .map(u -> new UserSimpleInfoDto(u.getId(), u.getName()))
+                .map(SimpleUserInfoDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void deleteAllTravels() {
+        travelRepository.deleteAll();
     }
 }

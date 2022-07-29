@@ -3,6 +3,7 @@ package com.ssu.travel.service.travel;
 import com.ssu.travel.dto.travel.TravelCreateRequestDto;
 import com.ssu.travel.dto.travel.TravelResponseDto;
 import com.ssu.travel.dto.user.SimpleUserInfoDto;
+import com.ssu.travel.jpa.travel.Travel;
 import com.ssu.travel.jpa.travel.TravelRepository;
 import com.ssu.travel.jpa.travel.TravelType;
 import com.ssu.travel.jpa.user.User;
@@ -45,13 +46,13 @@ class TravelServiceTest {
         TravelCreateRequestDto requestDto = new TravelCreateRequestDto(userA.getId(), "졸업 여행", TravelType.PUBLIC,
                 LocalDate.now(), LocalDate.of(2022, 12, 25));
 
-        TravelResponseDto travelResponseDto = travelService.insertTravel(requestDto.toEntity());
+        Travel travel = travelService.insertTravel(requestDto.toEntity());
 
         // when
         User userB = userRepository.save(new User(UserType.USER, "pkb9239@ssu.ac.kr", "박경빈", "0711", 2L));
-        travelService.addUserToTravel(travelResponseDto.getId(), userB.getId());
+        travelService.addUserToTravel(travel.getId(), userB.getId());
 
-        List<SimpleUserInfoDto> users = travelService.getSimpleUsersOfTravel(travelResponseDto.getId());
+        List<SimpleUserInfoDto> users = travelService.getSimpleUsersOfTravel(travel.getId());
         Assertions.assertThat(users).hasSize(2);
 
         users.forEach(u -> System.out.println(u.toString()));

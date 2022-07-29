@@ -1,18 +1,15 @@
 package com.ssu.travel.service.travel;
 
-import com.ssu.travel.dto.travel.TravelCreateRequestDto;
-import com.ssu.travel.dto.travel.TravelResponseDto;
-import com.ssu.travel.dto.user.UserSimpleInfoDto;
+import com.ssu.travel.dto.user.SimpleUserInfoDto;
 import com.ssu.travel.jpa.travel.Travel;
 import com.ssu.travel.jpa.user.User;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface TravelService {
-    TravelResponseDto createTravel(TravelCreateRequestDto requestDto);
+    Travel insertTravel(Travel travel);
 
-    List<TravelResponseDto> getAllTravels();
+    List<Travel> getAllTravels();
 
     void addUserToTravel(Long travelId, Long userId);
 
@@ -20,5 +17,7 @@ public interface TravelService {
 
     List<User> getUsersOfTravel(Long travelId);
 
-    List<UserSimpleInfoDto> getSimpleUsersOfTravel(Long travelId);
+    List<SimpleUserInfoDto> getSimpleUsersOfTravel(Long travelId);
+
+    void deleteAllTravels();
 }
