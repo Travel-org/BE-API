@@ -48,7 +48,7 @@ class PlaceServiceTest {
 
         placeService.insertPlace(ssuUniv);
         placeService.insertPlace(cauUniv);
-        List<PlaceResponseDto> places = placeService.getAllPlaces();
+        List<Place> places = placeService.getAllPlaces();
 
         places.forEach(s -> System.out.printf("{%f, %f} %n", s.getLat(), s.getLng()));
 
@@ -56,7 +56,8 @@ class PlaceServiceTest {
     }
 
     @Test
-    public void findByIDTest() {
+    @DisplayName("Id를_통한_검색")
+    public void findById() {
         Place ssuUniv = Place.builder()
                 .lat(37.494705526855)
                 .lng(126.95994559383)
@@ -79,16 +80,16 @@ class PlaceServiceTest {
         placeService.insertPlace(ssuUniv);
         placeService.insertPlace(cauUniv);
 
-        PlaceResponseDto ssuPlace = placeService.findPlaceById(ssuUniv.getId());
-        PlaceResponseDto cauPlace = placeService.findPlaceById(cauUniv.getId());
+        Place ssuPlace = placeService.findPlaceById(ssuUniv.getId());
+        Place cauPlace = placeService.findPlaceById(cauUniv.getId());
 
-        Assertions.assertThat(ssuPlace.getPlaceId()).isEqualTo(ssuUniv.getId());
-        Assertions.assertThat(cauPlace.getPlaceId()).isEqualTo(cauUniv.getId());
+        Assertions.assertThat(ssuPlace.getId()).isEqualTo(ssuUniv.getId());
+        Assertions.assertThat(cauPlace.getId()).isEqualTo(cauUniv.getId());
     }
 
     @Test
     @DisplayName("이름을 통한 검색")
-    public void findByNameTest() {
+    public void findByName() {
         Place ssuUniv = Place.builder()
                 .lat(37.494705526855)
                 .lng(126.95994559383)
@@ -133,8 +134,8 @@ class PlaceServiceTest {
         placeService.insertPlace(kakao);
         placeService.insertPlace(naver);
 
-        List<PlaceResponseDto> universities = placeService.findPlacesByName("대학교");
-        List<PlaceResponseDto> allPlaces = placeService.getAllPlaces();
+        List<Place> universities = placeService.findPlacesByName("대학교");
+        List<Place> allPlaces = placeService.getAllPlaces();
 
         assertThat(universities, hasSize(2));
         Assertions.assertThat(allPlaces.size()).isEqualTo(4);
