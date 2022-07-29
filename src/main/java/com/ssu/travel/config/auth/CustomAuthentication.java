@@ -4,6 +4,7 @@ import com.ssu.travel.jpa.user.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class CustomAuthentication implements Authentication {
@@ -16,7 +17,10 @@ public class CustomAuthentication implements Authentication {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Collection<GrantedAuthority> grantedAuthorityCollection = new ArrayList<>();
+        grantedAuthorityCollection.add((GrantedAuthority) () -> user.getUserType().name());
+
+        return grantedAuthorityCollection;
     }
 
     @Override
