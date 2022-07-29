@@ -2,8 +2,10 @@ package com.ssu.travel.jpa.schedule;
 
 import com.ssu.travel.jpa.place.Place;
 import com.ssu.travel.jpa.travel.Travel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,7 +27,15 @@ public class Schedule {
     @JoinColumn(name = "place_id")
     private Place place;
 
-    private LocalDateTime startDateTime;
+    private LocalDateTime startTime;
 
-    private LocalDateTime endDateTime;
+    private LocalDateTime endTime;
+
+    @Builder
+    public Schedule(@NonNull Travel travel, @NonNull Place place, LocalDateTime startTime, LocalDateTime endTime) {
+        this.travel = travel;
+        this.place = place;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 }
