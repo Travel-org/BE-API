@@ -1,12 +1,15 @@
 package com.ssu.travel.service.user;
 
-import com.ssu.travel.dto.user.UserCreateRequestDto;
-import com.ssu.travel.dto.user.UserResponseInfoDto;
+import com.ssu.travel.dto.user.UserResponseDto;
+import com.ssu.travel.jpa.user.User;
 
 import java.util.List;
 
 public interface UserService {
-    UserResponseInfoDto createUser(UserCreateRequestDto userCreateRequestDto);
 
-    List<UserResponseInfoDto> getUsers();
+    List<User> getUsers();
+
+    User insertUser(User user);
+
+    void deleteAllUsers();
 }

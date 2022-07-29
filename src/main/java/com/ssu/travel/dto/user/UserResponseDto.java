@@ -6,14 +6,14 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class UserResponseInfoDto {
+public class UserResponseDto {
     private final Long userId;
     private final String userType;
     private final String name;
     private final String email;
     private final String phoneNumber;
 
-    public UserResponseInfoDto(User entity) {
+    public UserResponseDto(User entity) {
         this.userId = entity.getId();
         this.userType = entity.getUserType().toString();
         this.name = entity.getName();

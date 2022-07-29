@@ -6,11 +6,11 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum UserType {
-    GUEST("GUEST", "guest"),
-    USER("USER", "user"),
-    HOST("HOST", "host"),
-    ADMIN("ADMIN", "administrator"),
-    LOCAL_GOVERNMENT("LOCAL_GOVERNMENT", "local government");
+    GUEST("ROLE_GUEST", "guest"),
+    USER("ROLE_USER", "user"),
+    HOST("ROLE_HOST", "host"),
+    ADMIN("ROLE_ADMIN", "administrator"),
+    LOCAL_GOVERNMENT("ROLE_LOCAL_GOVERNMENT", "local government");
 
     private final String key;
     private final String title;
