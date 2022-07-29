@@ -1,8 +1,10 @@
 package com.ssu.travel.jpa.payment;
 
 import com.ssu.travel.jpa.reservation.Reservation;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.*;
 
@@ -20,4 +22,10 @@ public class Payment {
     private Reservation reservation;
 
     private Long amount;
+
+    @Builder
+    public Payment(@NonNull Reservation reservation, @NonNull Long amount) {
+        this.reservation = reservation;
+        this.amount = amount;
+    }
 }

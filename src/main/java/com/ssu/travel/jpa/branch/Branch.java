@@ -2,8 +2,10 @@ package com.ssu.travel.jpa.branch;
 
 import com.ssu.travel.jpa.schedule.Schedule;
 import com.ssu.travel.jpa.user.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.*;
 
@@ -24,4 +26,11 @@ public class Branch {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "schedule_id")
     private Schedule schedule;
+
+    @Builder
+    public Branch(@NonNull User user, @NonNull Schedule schedule) {
+        this.id = id;
+        this.user = user;
+        this.schedule = schedule;
+    }
 }
