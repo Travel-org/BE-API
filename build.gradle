@@ -37,7 +37,7 @@ dependencies {
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
     // maria-db
-    implementation 'org.mariadb.jdbc:mariadb-java-client'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.29'
     runtimeOnly 'com.h2database:h2:1.4.200'
 
     // sql query check
