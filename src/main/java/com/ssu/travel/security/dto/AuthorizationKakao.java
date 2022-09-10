@@ -1,4 +1,4 @@
-package com.ssu.travel.dto;
+package com.ssu.travel.security.dto;
 
 import lombok.Getter;
 
