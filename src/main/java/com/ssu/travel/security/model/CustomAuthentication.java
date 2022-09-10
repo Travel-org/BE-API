@@ -1,26 +1,24 @@
-package com.ssu.travel.config.auth;
+package com.ssu.travel.security.model;
 
-import com.ssu.travel.jpa.user.User;
+import com.ssu.travel.user.User;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+@RequiredArgsConstructor
+@Getter
 public class CustomAuthentication implements Authentication {
 
     private final User user;
 
-    public CustomAuthentication(User user) {
-        this.user = user;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> grantedAuthorityCollection = new ArrayList<>();
-        grantedAuthorityCollection.add((GrantedAuthority) () -> user.getUserType().name());
-
-        return grantedAuthorityCollection;
+        return List.of(new SimpleGrantedAuthority(user.getRole().getName()));
     }
 
     @Override
@@ -45,7 +43,6 @@ public class CustomAuthentication implements Authentication {
 
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-
     }
 
     @Override
