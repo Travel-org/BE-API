@@ -1,19 +1,18 @@
-package com.ssu.travel.jpa.branch;
+package com.ssu.travel.branch;
 
-import com.ssu.travel.jpa.schedule.Schedule;
-import com.ssu.travel.jpa.user.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import com.ssu.travel.schedule.Schedule;
+import com.ssu.travel.user.User;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Branch {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "branch_id")
@@ -27,10 +26,13 @@ public class Branch {
     @JoinColumn(name = "schedule_id")
     private Schedule schedule;
 
-    @Builder
-    public Branch(@NonNull User user, @NonNull Schedule schedule) {
-        this.id = id;
+    private Branch(User user, Schedule schedule) {
         this.user = user;
         this.schedule = schedule;
     }
+
+    public static Branch of(User user, Schedule schedule) {
+        return new Branch(user, schedule);
+    }
+
 }
