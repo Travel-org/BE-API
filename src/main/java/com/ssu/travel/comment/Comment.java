@@ -1,16 +1,13 @@
-package com.ssu.travel.jpa.comment;
+package com.ssu.travel.comment;
 
-import com.ssu.travel.jpa.post.Post;
-import com.ssu.travel.jpa.user.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import com.ssu.travel.post.Post;
+import com.ssu.travel.user.User;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Comment {
     @Id
@@ -29,10 +26,14 @@ public class Comment {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Builder
-    public Comment(@NonNull Post post, @NonNull User user, @NonNull String content) {
+    private Comment(Post post, User user, String content) {
         this.post = post;
         this.user = user;
         this.content = content;
     }
+
+    public static Comment of(Post post, User user, String content) {
+        return new Comment(post, user, content);
+    }
+
 }

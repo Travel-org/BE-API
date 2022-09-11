@@ -1,4 +1,4 @@
-package com.ssu.travel.jpa.comment;
+package com.ssu.travel.comment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
