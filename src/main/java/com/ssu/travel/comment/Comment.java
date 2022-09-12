@@ -12,7 +12,6 @@ import javax.persistence.*;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "comment_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,14 +25,17 @@ public class Comment {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    private Comment(Post post, User user, String content) {
-        this.post = post;
-        this.user = user;
+
+    public void changeInfo(String content) {
         this.content = content;
     }
 
-    public static Comment of(Post post, User user, String content) {
-        return new Comment(post, user, content);
-    }
 
+    public static Comment of(Post post, User user, String content) {
+        Comment comment = new Comment();
+        comment.post = post;
+        comment.user = user;
+        comment.content = content;
+        return comment;
+    }
 }
