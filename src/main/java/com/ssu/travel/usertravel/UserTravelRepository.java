@@ -1,4 +1,4 @@
-package com.ssu.travel.jpa.usertravel;
+package com.ssu.travel.usertravel;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
