@@ -1,4 +1,4 @@
-package com.ssu.travel.security.model;
+package com.ssu.travel.security.dto;
 
 import com.ssu.travel.user.User;
 import lombok.Getter;
@@ -10,8 +10,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Getter
+@RequiredArgsConstructor
 public class CustomAuthentication implements Authentication {
 
     private final User user;

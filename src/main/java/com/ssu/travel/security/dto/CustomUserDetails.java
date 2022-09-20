@@ -1,4 +1,4 @@
-package com.ssu.travel.security.model;
+package com.ssu.travel.security.dto;
 
 import com.ssu.travel.user.User;
 import lombok.Builder;
@@ -17,6 +17,7 @@ public class CustomUserDetails implements UserDetails {
     private User user;
 
     private String accessToken;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
