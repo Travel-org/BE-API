@@ -1,6 +1,6 @@
 package com.ssu.travel.security.config;
 
-import com.ssu.travel.security.resolver.CurrentUserArgumentResolver;
+import com.ssu.travel.security.resolver.LoginUserArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private final CurrentUserArgumentResolver currentUserArgumentResolver;
+    private final LoginUserArgumentResolver loginUserArgumentResolver;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -35,14 +35,14 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(currentUserArgumentResolver);
+        argumentResolvers.add(loginUserArgumentResolver);
     }
 
     @Bean
     public CookieSerializer customCookieSerializer() {
         DefaultCookieSerializer defaultCookieSerializer = new DefaultCookieSerializer();
         defaultCookieSerializer.setUseHttpOnlyCookie(false);
+
         return defaultCookieSerializer;
     }
-
 }
