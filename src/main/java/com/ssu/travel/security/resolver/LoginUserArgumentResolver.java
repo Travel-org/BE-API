@@ -1,8 +1,8 @@
 package com.ssu.travel.security.resolver;
 
-import com.ssu.travel.security.annotation.CurrentUser;
-import com.ssu.travel.security.model.CustomUserDetails;
-import com.ssu.travel.security.model.SessionUser;
+import com.ssu.travel.security.annotation.LoginUser;
+import com.ssu.travel.security.dto.CustomUserDetails;
+import com.ssu.travel.security.dto.SessionUser;
 import com.ssu.travel.user.User;
 import org.springframework.core.MethodParameter;
 import org.springframework.security.core.Authentication;
@@ -14,13 +14,13 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 @Component
-public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolver {
+public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        boolean isLoginUserAnnotation = parameter.getParameterAnnotation(CurrentUser.class) != null;
+        boolean isLoginUserAnnotation = parameter.getParameterAnnotation(LoginUser.class) != null;
         boolean isUserClass = SessionUser.class.equals(parameter.getParameterType());
-        return isUserClass && isLoginUserAnnotation;
+        return isLoginUserAnnotation && isUserClass;
     }
 
     @Override
@@ -38,5 +38,4 @@ public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolve
                 .accessToken(principal.getAccessToken())
                 .build();
     }
-
 }
