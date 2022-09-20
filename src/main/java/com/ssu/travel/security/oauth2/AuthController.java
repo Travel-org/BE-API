@@ -18,6 +18,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RestController
 public class AuthController {
+
     private final AuthService authService;
 
     @GetMapping("/v1/oauth2/authorization/kakao")
@@ -52,5 +53,4 @@ public class AuthController {
         LoginSuccessResponse responseDto = authService.login(request);
         return ResponseEntity.ok(responseDto);
     }
-
 }
