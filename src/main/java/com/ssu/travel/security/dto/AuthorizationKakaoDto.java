@@ -3,7 +3,7 @@ package com.ssu.travel.security.dto;
 import lombok.Getter;
 
 @Getter
-public class AuthorizationKakao {
+public class AuthorizationKakaoDto {
     private String access_token;
     private String token_type;
     private String refresh_token;
