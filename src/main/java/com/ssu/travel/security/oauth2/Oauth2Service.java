@@ -2,7 +2,7 @@ package com.ssu.travel.security.oauth2;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssu.travel.security.dto.AuthorizationKakao;
+import com.ssu.travel.security.dto.AuthorizationKakaoDto;
 import com.ssu.travel.security.jwt.provider.JwtTokenProvider;
 import com.ssu.travel.user.User;
 import com.ssu.travel.user.UserRepository;
@@ -30,19 +30,19 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class Oauth2Service {
+
     private final UserRepository userRepository;
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
-
     private final JwtTokenProvider jwtTokenProvider;
+
     @Value("${auth.kakaoOauth2ClinetId}")
     private String kakaoOauth2ClinetId;
     @Value("${auth.frontendRedirectUrl}")
     private String frontendRedirectUrl;
 
-    public AuthorizationKakao callTokenApi(String origin, String code) {
+    public AuthorizationKakaoDto callTokenApi(String origin, String code) {
         HttpHeaders headers = new HttpHeaders();
-
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -62,7 +62,7 @@ public class Oauth2Service {
             ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
             log.info("response.getBody() = {}", response.getBody());
 
-            return objectMapper.readValue(response.getBody(), AuthorizationKakao.class);
+            return objectMapper.readValue(response.getBody(), AuthorizationKakaoDto.class);
         } catch (RestClientException | JsonProcessingException ex) {
             log.warn("RestClientException | JsonProcessingException : {}", ex.getMessage());
             throw new RestClientException("error");
@@ -71,7 +71,6 @@ public class Oauth2Service {
 
     public JSONObject callGetUserByAccessToken(String accessToken) {
         HttpHeaders headers = new HttpHeaders();
-
         headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
@@ -95,13 +94,12 @@ public class Oauth2Service {
 
     public JSONObject setSessionOrRedirectToSignUp(JSONObject userInfoFromKakao, String accessToken) {
         Long kakaoId = (Long) userInfoFromKakao.get("id");
-        JSONObject kakao_account = (JSONObject) userInfoFromKakao.get("kakao_account");
+        JSONObject kakaoAccount = (JSONObject) userInfoFromKakao.get("kakao_account");
 
         Optional<User> user = userRepository.findByKakaoId(kakaoId);
 
         JSONObject result = new JSONObject();
-
-        if (kakao_account.get("email") != null) {
+        if (kakaoAccount.get("email") != null) {
             if (user.isEmpty()) {
                 result.put("status", 301);
                 result.put("kakaoId", kakaoId);
@@ -120,10 +118,9 @@ public class Oauth2Service {
     }
 
 
-    public JSONObject stringToJson (String userInfo) throws ParseException {
+    private JSONObject stringToJson(String userInfo) throws ParseException {
         JSONParser jsonParser = new JSONParser();
         Object object = jsonParser.parse(userInfo);
         return (JSONObject) object;
     }
-
 }
