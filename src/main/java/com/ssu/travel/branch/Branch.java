@@ -15,7 +15,6 @@ public class Branch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "branch_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,6 +25,16 @@ public class Branch {
     @JoinColumn(name = "schedule_id")
     private Schedule schedule;
 
+    public void updateUser(User user) {
+        this.user = user;
+    }
+
+    public void updateSchedule(Schedule schedule) {
+        this.schedule = schedule;
+        schedule.getBranches().add(this);
+    }
+
+
     private Branch(User user, Schedule schedule) {
         this.user = user;
         this.schedule = schedule;
@@ -34,5 +43,4 @@ public class Branch {
     public static Branch of(User user, Schedule schedule) {
         return new Branch(user, schedule);
     }
-
 }
