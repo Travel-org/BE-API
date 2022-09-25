@@ -1,4 +1,4 @@
-package com.ssu.travel.jpa.payment;
+package com.ssu.travel.payment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

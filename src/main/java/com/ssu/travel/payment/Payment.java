@@ -1,17 +1,15 @@
-package com.ssu.travel.jpa.payment;
+package com.ssu.travel.payment;
 
-import com.ssu.travel.jpa.reservation.Reservation;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import com.ssu.travel.reservation.Reservation;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Payment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_id")
@@ -23,9 +21,13 @@ public class Payment {
 
     private Long amount;
 
-    @Builder
-    public Payment(@NonNull Reservation reservation, @NonNull Long amount) {
+
+    private Payment(Reservation reservation, Long amount) {
         this.reservation = reservation;
         this.amount = amount;
+    }
+
+    public static Payment of(Reservation reservation, Long amount) {
+        return new Payment(reservation, amount);
     }
 }
