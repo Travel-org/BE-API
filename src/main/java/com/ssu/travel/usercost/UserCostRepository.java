@@ -10,10 +10,10 @@ import org.springframework.data.repository.query.Param;
 public interface UserCostRepository extends JpaRepository<UserCost, Long> {
 
     @Modifying
-    @Query("delete from UserCost uc where uc.cost = :cost and uc.user = :user")
-    void deleteByCostAndUser(@Param("cost") Cost cost, @Param("user") User user);
+    @Query("delete from UserCost uc where uc.user.id = :userId and uc.cost.id = :costId")
+    void deleteByUserIdAndCostId(@Param("userId") Long userId, @Param("costId") Long costId);
 
     @Modifying
-    @Query("update UserCost uc set uc.amount = :amount where uc = :userCost")
-    void updateByUserCostId(@Param("amount") Long amount, @Param("userCost") UserCost userCost);
+    @Query("update UserCost uc set uc.amount = :amount where uc.id = :userCostId")
+    void updateAmount(@Param("amount") Long amount, @Param("userCost") Long userCostId);
 }
