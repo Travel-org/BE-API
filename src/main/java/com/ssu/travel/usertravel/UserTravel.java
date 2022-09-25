@@ -3,10 +3,8 @@ package com.ssu.travel.usertravel;
 import com.ssu.travel.travel.Travel;
 import com.ssu.travel.user.User;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.aspectj.apache.bcel.generic.RET;
 
 import javax.persistence.*;
 
@@ -14,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class UserTravel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_travel_id")
@@ -27,10 +26,8 @@ public class UserTravel {
     @JoinColumn(name = "travel_id")
     private Travel travel;
 
-    public void setTravel(Travel travel) {
-        if (this.travel != null) {
-            this.travel.getUserTravels().remove(this);
-        }
+    public void updateTravel(Travel travel) {
+        this.travel.getUserTravels().remove(this);
         this.travel = travel;
         travel.getUserTravels().add(this);
     }
