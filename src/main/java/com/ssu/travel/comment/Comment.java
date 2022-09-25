@@ -10,8 +10,10 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "comment_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,17 +27,18 @@ public class Comment {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-
-    public void changeInfo(String content) {
+    public void updateContent(String content) {
         this.content = content;
     }
 
 
+    private Comment(Post post, User user, String content) {
+        this.post = post;
+        this.user = user;
+        this.content = content;
+    }
+
     public static Comment of(Post post, User user, String content) {
-        Comment comment = new Comment();
-        comment.post = post;
-        comment.user = user;
-        comment.content = content;
-        return comment;
+        return new Comment(post, user, content);
     }
 }

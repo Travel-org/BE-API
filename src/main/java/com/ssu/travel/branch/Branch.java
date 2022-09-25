@@ -15,6 +15,7 @@ public class Branch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "branch_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
