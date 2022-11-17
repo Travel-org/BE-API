@@ -1,27 +1,22 @@
-package com.ssu.travel.security.dto;
+package com.ssu.travel.global.security.jwt.dto;
 
-import com.ssu.travel.user.User;
-import lombok.Builder;
+import com.ssu.travel.domain.user.entity.User;
+import java.util.Collection;
+import java.util.List;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-
 @Getter
-@Builder
+@RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
-
-    private User user;
-
-    private String accessToken;
-
+    private final User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(user.getRole().getName()));
+        return List.of(new SimpleGrantedAuthority(user.getRole().name()));
     }
 
     @Override
@@ -31,15 +26,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
+        return String.valueOf(user.getId());
     }
 
     @Override
@@ -61,5 +48,4 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }
