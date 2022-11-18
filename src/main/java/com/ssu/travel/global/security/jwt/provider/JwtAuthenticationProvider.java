@@ -21,9 +21,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationProvider implements AuthenticationProvider {
-    private static final String ACCESS_TOKEN_EXPIRATION = "엑세스 토큰이 만료되었습니다.";
-    private static final String TOKEN_MODULATED = "엑세스 토큰이 변조되었습니다.";
-
     private final JwtProperties jwtProperties;
     private final JwtService<User> jwtService;
 
@@ -31,17 +28,15 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String token = (String) authentication.getPrincipal();
         try {
-            Claims claims = jwtService.getClaimsFromJwtToken(token,
-                    jwtProperties.getAccessTokenSigningKey());
-
+            Claims claims = jwtService.getClaimsFromJwtToken(token, jwtProperties.getAccessTokenSigningKey());
             User verifiedUser = jwtService.convertUserModel(claims);
             CustomUserDetails context = new CustomUserDetails(verifiedUser);
-            return new JwtPostAuthenticationToken(context);
 
+            return new JwtPostAuthenticationToken(context);
         } catch (MalformedJwtException | MissingClaimException ex) {
-            throw new ModulatedJwtTokenException(TOKEN_MODULATED);
+            throw new ModulatedJwtTokenException("엑세스 토큰이 변조되었습니다.");
         } catch (ExpiredJwtException ex) {
-            throw new ExpiredJwtTokenException(ACCESS_TOKEN_EXPIRATION);
+            throw new ExpiredJwtTokenException("엑세스 토큰이 만료되었습니다.");
         }
     }
 

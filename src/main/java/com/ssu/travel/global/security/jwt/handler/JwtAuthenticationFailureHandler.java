@@ -22,9 +22,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFailureHandler implements AuthenticationFailureHandler {
-    private static final String ACCESS_TOKEN_EXPIRATION = "엑세스 토큰이 만료되었습니다.";
-    private static final String TOKEN_MODULATED = "엑세스 토큰이 변조되었습니다.";
-
     private final ObjectMapper mapper;
 
     @Override
@@ -34,9 +31,9 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
 
         Result<?> result = null;
         if (exception instanceof ExpiredJwtTokenException) {
-            result = Result.createErrorResult(ACCESS_TOKEN_EXPIRATION);
+            result = Result.createErrorResult("엑세스 토큰이 만료되었습니다.");
         } else if (exception instanceof ModulatedJwtTokenException) {
-            result = Result.createErrorResult(TOKEN_MODULATED);
+            result = Result.createErrorResult("엑세스 토큰이 변조되었습니다.");
         }
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setHeader(HttpHeaders.CONTENT_ENCODING, "UTF-8");
