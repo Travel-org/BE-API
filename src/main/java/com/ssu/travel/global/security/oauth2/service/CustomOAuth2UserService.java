@@ -9,7 +9,7 @@ import com.ssu.travel.global.security.oauth2.dto.CustomOAuth2User;
 import com.ssu.travel.global.security.oauth2.model.OAuth2Provider;
 import com.ssu.travel.global.security.oauth2.model.OAuth2UserInfo;
 import com.ssu.travel.global.security.oauth2.model.OAuth2UserInfoFactory;
-import com.ssu.travel.global.utils.ClientIpUtils;
+import com.ssu.travel.global.security.utils.ClientIpUtils;
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
