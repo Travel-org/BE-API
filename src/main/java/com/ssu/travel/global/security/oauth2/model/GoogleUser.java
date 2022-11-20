@@ -16,21 +16,6 @@ public class GoogleUser extends OAuth2UserInfo {
         return (String) super.attributes.get("email");
     }
 
-    @Override
-    public Gender getGender() {
-        String gender = (String) super.attributes.get("gender");
-        if (gender.equals("male")) {
-            return Gender.MALE;
-        }
-        return Gender.FEMALE;
-    }
-
-    @Override
-    public LocalDate getBirthday() {
-        return null;
-    }
-
-    @Override
     public OAuth2Provider getOAuth2Provider() {
         return GOOGLE;
     }
