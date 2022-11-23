@@ -1,4 +1,4 @@
-package com.ssu.travel.domain.comment.dto.request;
+package com.ssu.travel.domain.comment.web.request;
 
 import javax.validation.constraints.NotBlank;
 import lombok.AccessLevel;

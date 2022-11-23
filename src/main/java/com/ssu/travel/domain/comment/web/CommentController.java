@@ -1,8 +1,8 @@
 package com.ssu.travel.domain.comment.web;
 
 import com.ssu.travel.domain.comment.dto.CommentDto;
-import com.ssu.travel.domain.comment.dto.request.CreateCommentRequest;
-import com.ssu.travel.domain.comment.dto.request.UpdateCommentRequest;
+import com.ssu.travel.domain.comment.web.request.CreateCommentRequest;
+import com.ssu.travel.domain.comment.web.request.UpdateCommentRequest;
 import com.ssu.travel.domain.comment.service.CommentService;
 import com.ssu.travel.domain.user.entity.User;
 import com.ssu.travel.global.dto.Result;
