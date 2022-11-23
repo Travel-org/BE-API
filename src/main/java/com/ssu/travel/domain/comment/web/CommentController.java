@@ -3,7 +3,6 @@ package com.ssu.travel.domain.comment.web;
 import com.ssu.travel.domain.comment.dto.CommentDto;
 import com.ssu.travel.domain.comment.dto.request.CreateCommentRequest;
 import com.ssu.travel.domain.comment.dto.request.UpdateCommentRequest;
-import com.ssu.travel.domain.comment.dto.response.CommentResponse;
 import com.ssu.travel.domain.comment.service.CommentService;
 import com.ssu.travel.domain.user.entity.User;
 import com.ssu.travel.global.dto.Result;
@@ -35,7 +34,7 @@ public class CommentController {
     @PutMapping("/api/comment/{commentId}")
     public ResponseEntity updateComment(@LoginUser User user,
                                         @PathVariable Long commentId,
-                                        @RequestBody @Validated UpdateCommentRequest request) { 
+                                        @RequestBody @Validated UpdateCommentRequest request) {
         CommentDto commentDto = commentService.updateComment(user, commentId, request);
         return ResponseEntity.ok(Result.createSuccessResult(commentDto));
     }
