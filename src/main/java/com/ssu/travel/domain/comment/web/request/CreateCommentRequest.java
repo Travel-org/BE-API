@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(staticName = "of")
 public class CreateCommentRequest {
+
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 }

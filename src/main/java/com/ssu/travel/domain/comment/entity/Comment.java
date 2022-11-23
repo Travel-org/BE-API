@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "comment")
 @Entity
 public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")

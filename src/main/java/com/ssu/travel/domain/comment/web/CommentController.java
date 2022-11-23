@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class CommentController {
+
     private final CommentService commentService;
 
     @PostMapping("/api/comment/{postId}")
-    public ResponseEntity saveComment(@LoginUser User user,
-                                      @PathVariable Long postId,
+    public ResponseEntity saveComment(@LoginUser User user, @PathVariable Long postId,
                                       @RequestBody @Validated CreateCommentRequest request) {
         CommentDto commentDto = commentService.saveComment(user, postId, request);
         return ResponseEntity.ok(Result.createSuccessResult(commentDto));
@@ -32,8 +32,7 @@ public class CommentController {
 
 
     @PutMapping("/api/comment/{commentId}")
-    public ResponseEntity updateComment(@LoginUser User user,
-                                        @PathVariable Long commentId,
+    public ResponseEntity updateComment(@LoginUser User user, @PathVariable Long commentId,
                                         @RequestBody @Validated UpdateCommentRequest request) {
         CommentDto commentDto = commentService.updateComment(user, commentId, request);
         return ResponseEntity.ok(Result.createSuccessResult(commentDto));
