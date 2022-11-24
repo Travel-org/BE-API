@@ -1,10 +1,10 @@
-package com.ssu.travel.schedule;
+package com.ssu.travel.domain.schedule.entity;
 
-import com.ssu.travel.branch.Branch;
-import com.ssu.travel.place.Place;
-import com.ssu.travel.post.Post;
-import com.ssu.travel.schedulePhoto.SchedulePhoto;
-import com.ssu.travel.travel.travelDate.TravelDate;
+import com.ssu.travel.domain.branch.entity.Branch;
+import com.ssu.travel.domain.place.entity.Place;
+import com.ssu.travel.domain.post.entity.Post;
+import com.ssu.travel.domain.schedulePhoto.entity.SchedulePhoto;
+import com.ssu.travel.domain.travelDate.entity.TravelDate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
