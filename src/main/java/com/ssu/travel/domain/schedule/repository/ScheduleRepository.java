@@ -1,6 +1,6 @@
-package com.ssu.travel.schedule;
+package com.ssu.travel.domain.schedule.repository;
 
-import com.ssu.travel.travel.Travel;
+import com.ssu.travel.domain.schedule.entity.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
