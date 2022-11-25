@@ -1,4 +1,5 @@
-package com.ssu.travel.cost.dto.request;
+package com.ssu.travel.domain.cost.web.request;
+
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -7,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-public class CostCalculateRequest {
-    private String[] receiverUuids;
+@AllArgsConstructor(staticName = "of")
+public class CalculateCostRequest {
+    private String[] emails;
 }

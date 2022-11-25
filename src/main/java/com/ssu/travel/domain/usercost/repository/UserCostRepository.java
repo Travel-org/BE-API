@@ -1,7 +1,6 @@
-package com.ssu.travel.usercost;
+package com.ssu.travel.domain.usercost.repository;
 
-import com.ssu.travel.cost.Cost;
-import com.ssu.travel.user.User;
+import com.ssu.travel.domain.usercost.entity.UserCost;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,5 +14,5 @@ public interface UserCostRepository extends JpaRepository<UserCost, Long> {
 
     @Modifying
     @Query("update UserCost uc set uc.amount = :amount where uc.id = :userCostId")
-    void updateAmount(@Param("amount") Long amount, @Param("userCost") Long userCostId);
+    void updateAmountById(@Param("amount") Long amount, @Param("userCostId") Long userCostId);
 }

@@ -4,7 +4,7 @@ import com.ssu.travel.domain.branch.entity.Branch;
 import com.ssu.travel.domain.place.entity.Place;
 import com.ssu.travel.domain.post.entity.Post;
 import com.ssu.travel.domain.schedulePhoto.entity.SchedulePhoto;
-import com.ssu.travel.domain.travelDate.entity.TravelDate;
+import com.ssu.travel.domain.traveldate.entity.TravelDate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
