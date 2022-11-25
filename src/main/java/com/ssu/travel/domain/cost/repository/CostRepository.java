@@ -2,12 +2,11 @@ package com.ssu.travel.domain.cost.repository;
 
 import com.ssu.travel.domain.cost.entity.Cost;
 import com.ssu.travel.domain.travel.entity.Travel;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.List;
-import java.util.Optional;
 
 public interface CostRepository extends JpaRepository<Cost, Long> {
 

@@ -8,7 +8,6 @@ import com.ssu.travel.domain.cost.web.request.UpdateCostRequest;
 import com.ssu.travel.domain.user.entity.User;
 import com.ssu.travel.global.dto.Result;
 import com.ssu.travel.global.security.annotation.LoginUser;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -63,7 +62,7 @@ public class CostController {
                                             @PathVariable Long costId,
                                             @PathVariable Long userCostId,
                                             @RequestBody @Validated CalculateCostRequest request) {
-        costService.calculateCost(user, userCostId, request);
+        costService.calculateUserCost(user, userCostId, request);
         return ResponseEntity.ok(Result.createSuccessResult(null));
     }
 }
