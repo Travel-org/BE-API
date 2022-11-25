@@ -6,7 +6,7 @@ import com.ssu.travel.domain.branch.entity.Branch;
 import com.ssu.travel.domain.place.dto.PlaceDto;
 import com.ssu.travel.domain.schedule.entity.Schedule;
 import com.ssu.travel.domain.schedulePhoto.dto.SchedulePhotoDto;
-import com.ssu.travel.domain.travelDate.entity.TravelDate;
+import com.ssu.travel.domain.traveldate.entity.TravelDate;
 import com.ssu.travel.domain.user.dto.SimpleUserDto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
