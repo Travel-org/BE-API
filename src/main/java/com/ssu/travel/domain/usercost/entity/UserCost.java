@@ -1,15 +1,14 @@
-package com.ssu.travel.usercost;
+package com.ssu.travel.domain.usercost.entity;
 
-import com.ssu.travel.cost.Cost;
-import com.ssu.travel.user.User;
+import com.ssu.travel.domain.cost.entity.Cost;
+import com.ssu.travel.domain.user.entity.User;
 import lombok.*;
-import lombok.extern.java.Log;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "user_cost")
 @Entity
 public class UserCost {
 
@@ -29,16 +28,6 @@ public class UserCost {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cost_id")
     private Cost cost;
-
-    public void update(Long amount, Boolean isRequested) {
-        this.amount = amount;
-        this.isRequested = isRequested;
-    }
-
-    public void isRequested() {
-        this.isRequested = true;
-    }
-
 
     @Builder(access = AccessLevel.PRIVATE)
     private UserCost(Long amount, Boolean isRequested, User user, Cost cost) {
@@ -64,5 +53,14 @@ public class UserCost {
                 .amount(amount)
                 .isRequested(isRequested)
                 .build();
+    }
+
+    public void update(Long amount, Boolean isRequested) {
+        this.amount = amount;
+        this.isRequested = isRequested;
+    }
+
+    public void isRequested() {
+        this.isRequested = true;
     }
 }
