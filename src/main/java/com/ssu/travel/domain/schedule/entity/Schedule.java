@@ -3,8 +3,7 @@ package com.ssu.travel.domain.schedule.entity;
 import com.ssu.travel.domain.branch.entity.Branch;
 import com.ssu.travel.domain.place.entity.Place;
 import com.ssu.travel.domain.post.entity.Post;
-import com.ssu.travel.domain.schedulePhoto.entity.SchedulePhoto;
-import com.ssu.travel.domain.traveldate.entity.TravelDate;
+import com.ssu.travel.domain.travel.entity.TravelDate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,10 +35,6 @@ public class Schedule {
     @JoinColumn(name = "place_id")
     private Place place;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "travel_id")
-//    private Travel travel;
-
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Branch> branches = new ArrayList<>();
 
@@ -55,6 +50,21 @@ public class Schedule {
     @Setter
     private LocalTime endTime;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "travel_id")
+//    private Travel travel;
+
+    private Schedule(TravelDate travelDate, Place place, LocalTime startTime, LocalTime endTime) {
+        this.travelDate = travelDate;
+        this.place = place;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public static Schedule of(TravelDate travelDate, Place place, LocalTime startTime, LocalTime endTime) {
+        return new Schedule(travelDate, place, startTime, endTime);
+    }
+
     public void addUser(Branch branch) {
         branch.updateSchedule(this);
     }
@@ -69,17 +79,5 @@ public class Schedule {
 
     public void removeSchedulePhotos(List<SchedulePhoto> photos) {
         this.photos.removeAll(photos);
-    }
-
-
-    private Schedule(TravelDate travelDate, Place place, LocalTime startTime, LocalTime endTime) {
-        this.travelDate = travelDate;
-        this.place = place;
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
-
-    public static Schedule of(TravelDate travelDate, Place place, LocalTime startTime, LocalTime endTime) {
-        return new Schedule(travelDate, place, startTime, endTime);
     }
 }
