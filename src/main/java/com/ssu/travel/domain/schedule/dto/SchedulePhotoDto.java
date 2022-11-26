@@ -1,6 +1,6 @@
-package com.ssu.travel.domain.schedulePhoto.dto;
+package com.ssu.travel.domain.schedule.dto;
 
-import com.ssu.travel.domain.schedulePhoto.entity.SchedulePhoto;
+import com.ssu.travel.domain.schedule.entity.SchedulePhoto;
 import lombok.Builder;
 import lombok.Getter;
 

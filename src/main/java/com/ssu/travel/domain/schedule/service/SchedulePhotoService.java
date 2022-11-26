@@ -1,12 +1,11 @@
-package com.ssu.travel.domain.schedulePhoto.service;
+package com.ssu.travel.domain.schedule.service;
 
 import static java.util.stream.Collectors.toList;
 
+import com.ssu.travel.domain.schedule.dto.SchedulePhotoDto;
 import com.ssu.travel.domain.schedule.entity.Schedule;
-import com.ssu.travel.domain.schedule.service.ScheduleService;
-import com.ssu.travel.domain.schedulePhoto.dto.SchedulePhotoDto;
-import com.ssu.travel.domain.schedulePhoto.entity.SchedulePhoto;
-import com.ssu.travel.domain.schedulePhoto.repository.SchedulePhotoRepository;
+import com.ssu.travel.domain.schedule.entity.SchedulePhoto;
+import com.ssu.travel.domain.schedule.repository.SchedulePhotoRepository;
 import com.ssu.travel.domain.user.entity.User;
 import com.ssu.travel.domain.user.service.UserService;
 import java.util.List;
