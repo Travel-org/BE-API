@@ -1,9 +1,8 @@
-package com.ssu.travel.schedulePhoto;
+package com.ssu.travel.domain.schedulePhoto.entity;
 
-import com.ssu.travel.schedule.Schedule;
-import com.ssu.travel.user.User;
+import com.ssu.travel.domain.schedule.entity.Schedule;
+import com.ssu.travel.domain.user.entity.User;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
