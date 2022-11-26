@@ -1,6 +1,6 @@
 package com.ssu.travel.domain.schedulePhoto.service;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 import com.ssu.travel.domain.schedule.entity.Schedule;
 import com.ssu.travel.domain.schedule.service.ScheduleService;
@@ -25,14 +25,32 @@ public class SchedulePhotoService {
     private final ScheduleService scheduleService;
 
     public List<SchedulePhotoDto> saveSchedulePhotos(User user, Long scheduleId, List<MultipartFile> photos) {
-        User userEntity = userService.findUserEntityById(user.getId());
+        userService.findUserEntityById(user.getId());
         Schedule schedule = scheduleService.findScheduleEntityById(scheduleId);
-        //  TODO: photo 저장
+
+        //  TODO: photo 저장 (S3 or ec2 자체에 저장할지 고민)
         List<SchedulePhoto> schedulePhotos = null;
         schedulePhotoRepository.saveAll(schedulePhotos);
         schedule.addSchedulePhotos(schedulePhotos);
+
         return schedulePhotos.stream()
                 .map(SchedulePhotoDto::from)
                 .collect(toList());
+    }
+
+    // TODO: schedulePhoto
+    public List<SchedulePhotoDto> getSchedulePhotos(Long scheduleId) {
+        Schedule schedule = scheduleService.findScheduleEntityById(scheduleId);
+        return schedule.getPhotos().stream()
+                .map(SchedulePhotoDto::from)
+                .collect(toList());
+    }
+
+    public void deleteSchedulePhotos(Long scheduleId, List<Long> schedulePhotoIds) {
+        Schedule schedule = scheduleService.findScheduleEntityById(scheduleId);
+        List<SchedulePhoto> schedulePhotos =
+                schedulePhotoRepository.findAllById(schedulePhotoIds);
+        schedule.removeSchedulePhotos(schedulePhotos);
+        schedulePhotoRepository.deleteAll(schedulePhotos);
     }
 }
