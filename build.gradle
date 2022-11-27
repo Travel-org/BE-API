@@ -55,12 +55,19 @@ dependencies {
     // fileUpload
     implementation 'commons-fileupload:commons-fileupload:1.4'
 
+    // mail
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+}
+
+jar {
+    enabled = false
 }
 
 tasks.named('test') {
