@@ -1,7 +1,7 @@
 package com.ssu.travel.domain.friend.entity;
 
-import com.ssu.travel.domain.friend.exception.DuplicatedRequestException;
 import com.ssu.travel.domain.user.entity.User;
+import com.ssu.travel.global.exception.custom.DuplicatedRequestException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
