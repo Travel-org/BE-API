@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.ssu'
-version = '1.0'
+version = 'v1.0'
 sourceCompatibility = '11'
 
 configurations {
@@ -46,14 +46,14 @@ dependencies {
     // Session JDBC
     implementation 'org.springframework.session:spring-session-jdbc'
 
-    // mysql
+    // maridab
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
-    // aws setting
-//    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+    // h2
+    runtimeOnly 'com.h2database:h2'
 
-    // fileUpload
-    implementation 'commons-fileupload:commons-fileupload:1.4'
+    // p6spy
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.1'
 
     // mail
     implementation 'org.springframework.boot:spring-boot-starter-mail'
@@ -64,12 +64,28 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    // Querydsl
+    implementation 'com.querydsl:querydsl-jpa'
+    // Querydsl JPAAnnotationProcessor 사용 지정
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
+    // java.lang.NoClassDefFoundError(javax.annotation.Entity) 발생 대응
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+    // java.lang.NoClassDefFoundError(javax.annotation.Generated) 발생 대응
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+
+// clean task 실행시 QClass 삭제
+clean {
+    delete file('src/main/generated') // 인텔리제이 Annotation processor 생성물 생성 위치
 }
 
 jar {
     enabled = false
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}

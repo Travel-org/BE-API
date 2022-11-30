@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: ${LOCAL_DATASOURCE_URL}
+    username: ${LOCAL_DATASOURCE_USERNAME}
+    password: ${LOCAL_DATASOURCE_PASSWORD}
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+
+  profiles:
+    include: security
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_ID}@gmail.com
+    password: ${EMAIL_PW}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    default-encoding: UTF-8
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+# default application setting
+# encoding properties
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
+app:
+  base-url: ${FRONTEND_URL}
+  oauth2:
+    authorized-redirect-uri: ${FRONTEND_URL}/oauth/saving
+  storage:
+    root: /Users/jongminchung/images
+    location: /images
+  user:
+    default-image: /images/default_user_profile.jpeg
