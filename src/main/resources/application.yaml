@@ -54,4 +54,8 @@ app:
     root: /Users/jongminchung/images
     location: /images
   user:
-    default-image: /images/default_user_profile.jpeg
+    default-image: /images/default_user_profile.jpg
+  photo-default-images:
+    post: /images/default_post.png
+    notice: /images/default_notice.png
+    event: /images/default_event.png
